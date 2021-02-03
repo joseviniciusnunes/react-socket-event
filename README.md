@@ -13,7 +13,7 @@ yarn add react-socket-event
 ## Quick Start
 
 ```js
-import SocketEvent from '../src';
+import SocketEvent from 'react-socket-event';
 
 SocketEvent.on('my-event', (data) => {
     console.log(data);
