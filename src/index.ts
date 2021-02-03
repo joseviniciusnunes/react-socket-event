@@ -19,7 +19,6 @@ function on(chanel: string, cb: (data: any) => void, key?: string) {
         const ev = global.eventsRegister[index];
         if (ev.chanel === chanel && ev.key !== undefined && ev.key === key) {
             global.eventsRegister.splice(index, 1);
-            console.log('removido', index);
             break;
         }
     }
