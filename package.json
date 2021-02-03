@@ -1,7 +1,7 @@
 {
     "name": "react-socket-event",
     "author": "José Vinicius <joseviniciuus@outlook.com>",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "lib/index.js",
     "license": "MIT",
     "repository": "joseviniciusnunes/react-socket-event",

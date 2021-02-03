@@ -32,7 +32,12 @@ function on(chanel: string, cb: (data: any) => void, key?: string) {
 function emit(chanel: string, data?: any) {
     for (const ev of global.eventsRegister) {
         if (ev.chanel === chanel) {
-            ev.cb(data);
+            try {
+                ev.cb(data);
+            } catch (error) {
+                console.error(`Error Chanel: ${chanel}`);
+                console.error(error);
+            }
         }
     }
 }
