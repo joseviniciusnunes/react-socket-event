@@ -14,46 +14,48 @@ interface EventEmit {
 
 global.eventsRegister = [];
 
-function on(chanel: string, cb: (data: any) => void, key?: string) {
-    for (let index = 0; index < global.eventsRegister.length; index++) {
-        const ev = global.eventsRegister[index];
-        if (ev.chanel === chanel && ev.key !== undefined && ev.key === key) {
-            global.eventsRegister.splice(index, 1);
-            break;
+class SocketEvent {
+    on(chanel: string, cb: (data: any) => void, key?: string) {
+        for (let index = 0; index < global.eventsRegister.length; index++) {
+            const ev = global.eventsRegister[index];
+            if (ev.chanel === chanel && ev.key !== undefined && ev.key === key) {
+                global.eventsRegister.splice(index, 1);
+                break;
+            }
         }
+        global.eventsRegister.push({
+            chanel,
+            cb,
+            key,
+        });
     }
-    global.eventsRegister.push({
-        chanel,
-        cb,
-        key,
-    });
-}
 
-function emit(chanel: string, data?: any) {
-    for (const ev of global.eventsRegister) {
-        if (ev.chanel === chanel) {
-            try {
-                ev.cb(data);
-            } catch (error) {
-                console.error(`Error Chanel: ${chanel}`);
-                console.error(error);
+    emit(chanel: string, data?: any) {
+        for (const ev of global.eventsRegister) {
+            if (ev.chanel === chanel) {
+                try {
+                    ev.cb(data);
+                } catch (error) {
+                    console.error(`Error Chanel: ${chanel}`);
+                    console.error(error);
+                }
             }
         }
     }
-}
 
-function clear(chanel: string) {
-    const newArr = [];
-    for (const ev of global.eventsRegister) {
-        if (ev.chanel !== chanel) {
-            newArr.push(ev);
+    clear(chanel: string) {
+        const newArr = [];
+        for (const ev of global.eventsRegister) {
+            if (ev.chanel !== chanel) {
+                newArr.push(ev);
+            }
         }
+        global.eventsRegister = newArr;
     }
-    global.eventsRegister = newArr;
+
+    clearAll() {
+        global.eventsRegister = [];
+    }
 }
 
-export default {
-    on,
-    emit,
-    clear,
-};
+export default new SocketEvent();
