@@ -31,10 +31,11 @@ class SocketEvent {
     }
 
     emit(chanel: string, data?: any) {
+        const promisesResolve = [];
         for (const ev of global.eventsRegister) {
             if (ev.chanel === chanel) {
                 try {
-                    ev.cb(data);
+                    (async () => await ev.cb(data))();
                 } catch (error) {
                     console.error(`Error Chanel: ${chanel}`);
                     console.error(error);
