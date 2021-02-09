@@ -57,6 +57,10 @@ class SocketEvent {
     clearAll() {
         global.eventsRegister = [];
     }
+
+    getAllListeners() {
+        return global.eventsRegister;
+    }
 }
 
 export default new SocketEvent();

@@ -22,6 +22,14 @@ SocketEvent.on('my-event', (data) => {
 SocketEvent.emit('my-event', 'hello, world');
 ```
 
+```js
+SocketEvent.clear('my-event'); //remove all listeners to 'my-event'
+
+SocketEvent.clearAll(); //remove all listeners
+
+SocketEvent.getAllListeners(); //return all listeners [{chanel, cb, key}]
+```
+
 # Overwrite repeated listeners
 
 ```js

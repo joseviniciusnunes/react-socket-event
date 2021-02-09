@@ -15,6 +15,7 @@ declare class SocketEvent {
     emit(chanel: string, data?: any): void;
     clear(chanel: string): void;
     clearAll(): void;
+    getAllListeners(): EventEmit[];
 }
 declare const _default: SocketEvent;
 export default _default;
