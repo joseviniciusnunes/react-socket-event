@@ -6,12 +6,13 @@ declare global {
     }
 }
 interface EventEmit {
+    id: string;
     chanel: string;
     cb: (data: any) => void;
     key?: string;
 }
 declare class SocketEvent {
-    on(chanel: string, cb: (data: any) => void, key?: string): void;
+    on(chanel: string, cb: (data: any) => void, key?: string): () => void;
     emit(chanel: string, data?: any): void;
     clear(chanel: string): void;
     clearAll(): void;

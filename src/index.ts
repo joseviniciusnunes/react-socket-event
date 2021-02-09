@@ -7,12 +7,31 @@ declare global {
 }
 
 interface EventEmit {
+    id: string;
     chanel: string;
     cb: (data: any) => void;
     key?: string;
 }
 
 global.eventsRegister = [];
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+        var r = (Math.random() * 16) | 0,
+            v = c == 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+    });
+}
+
+function removeListenerId(id: string) {
+    const newArr = [];
+    for (const ev of global.eventsRegister) {
+        if (ev.id !== id) {
+            newArr.push(ev);
+        }
+    }
+    global.eventsRegister = newArr;
+}
 
 class SocketEvent {
     on(chanel: string, cb: (data: any) => void, key?: string) {
@@ -23,11 +42,14 @@ class SocketEvent {
                 break;
             }
         }
+        const id = uuidv4();
         global.eventsRegister.push({
+            id,
             chanel,
             cb,
             key,
         });
+        return () => removeListenerId(id);
     }
 
     emit(chanel: string, data?: any) {

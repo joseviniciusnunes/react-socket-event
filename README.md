@@ -15,9 +15,13 @@ yarn add react-socket-event
 ```js
 import SocketEvent from 'react-socket-event';
 
-SocketEvent.on('my-event', (data) => {
-    console.log(data);
-});
+useEffect(() => {
+    const removeListener = SocketEvent.on('my-event', (data) => {
+        console.log(data);
+    });
+
+    return removeListener; //remove listener on unmount the component
+}, []);
 
 SocketEvent.emit('my-event', 'hello, world');
 ```
@@ -27,7 +31,7 @@ SocketEvent.clear('my-event'); //remove all listeners to 'my-event'
 
 SocketEvent.clearAll(); //remove all listeners
 
-SocketEvent.getAllListeners(); //return all listeners [{chanel, cb, key}]
+SocketEvent.getAllListeners(); //return all listeners [{id, chanel, cb, key}]
 ```
 
 # Overwrite repeated listeners
