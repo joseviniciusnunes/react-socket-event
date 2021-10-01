@@ -1,5 +1,7 @@
 # Socket Event for React
 
+#### A quick and simple way to fire triggers in any React application.
+
 ---
 
 ## Installation
