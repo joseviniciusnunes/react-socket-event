@@ -11,12 +11,16 @@ interface EventEmit {
     cb: (data: any) => void;
     key?: string;
 }
-declare class SocketEvent {
-    on(chanel: string, cb: (data: any) => void, key?: string): () => void;
-    emit(chanel: string, data?: any): void;
-    clear(chanel: string): void;
-    clearAll(): void;
-    getAllListeners(): EventEmit[];
-}
-declare const _default: SocketEvent;
-export default _default;
+declare function on(chanel: string, cb: (data: any) => void, key?: string): () => void;
+declare function emit(chanel: string, data?: any): void;
+declare function clear(chanel: string): void;
+declare function clearAll(): void;
+declare function getAllListeners(): EventEmit[];
+declare const SocketEvent: {
+    on: typeof on;
+    emit: typeof emit;
+    clear: typeof clear;
+    clearAll: typeof clearAll;
+    getAllListeners: typeof getAllListeners;
+};
+export default SocketEvent;

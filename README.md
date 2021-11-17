@@ -5,9 +5,11 @@
 
 <br />
 
-### An easy way to create and call events within your React application.
+<p style="font-size: 18px" align="center">
+An easy way to create and call events within your React application.
+</p>
 
----
+<br />
 
 ## Installation
 
