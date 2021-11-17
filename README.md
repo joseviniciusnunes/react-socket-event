@@ -3,6 +3,8 @@
   <h1 align="center">Socket Event for React</h1>
 </p>
 
+[![npm-version](https://img.shields.io/npm/v/react-socket-event?color=brightgreen&label=npm%20package)](https://www.npmjs.com/package/react-socket-event)
+
 <br />
 
 <p style="font-size: 18px" align="center">
