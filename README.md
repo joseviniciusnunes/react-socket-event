@@ -1,6 +1,11 @@
-# Socket Event for React
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/22475804/142086991-13c347cc-022b-4a6e-8d16-03d1ab210467.png" height="200px" />
+  <h1 align="center">Socket Event for React</h1>
+</p>
 
-#### A quick and simple way to fire triggers in any React application.
+<br />
+
+### An easy way to create and call events within your React application.
 
 ---
 
