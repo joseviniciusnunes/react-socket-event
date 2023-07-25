@@ -1,9 +1,5 @@
 declare global {
-    namespace NodeJS {
-        interface Global {
-            eventsRegister: EventEmit[];
-        }
-    }
+    var eventsRegister: EventEmit[];
 }
 
 interface EventEmit {
@@ -13,7 +9,7 @@ interface EventEmit {
     key?: string;
 }
 
-global.eventsRegister = [];
+globalThis.eventsRegister = [];
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -25,24 +21,24 @@ function uuidv4() {
 
 function removeListenerId(id: string) {
     const newArr = [];
-    for (const ev of global.eventsRegister) {
+    for (const ev of globalThis.eventsRegister) {
         if (ev.id !== id) {
             newArr.push(ev);
         }
     }
-    global.eventsRegister = newArr;
+    globalThis.eventsRegister = newArr;
 }
 
 function on(chanel: string, cb: (data: any) => void, key?: string) {
-    for (let index = 0; index < global.eventsRegister.length; index++) {
-        const ev = global.eventsRegister[index];
+    for (let index = 0; index < globalThis.eventsRegister.length; index++) {
+        const ev = globalThis.eventsRegister[index];
         if (ev.chanel === chanel && ev.key !== undefined && ev.key === key) {
-            global.eventsRegister.splice(index, 1);
+            globalThis.eventsRegister.splice(index, 1);
             break;
         }
     }
     const id = uuidv4();
-    global.eventsRegister.push({
+    globalThis.eventsRegister.push({
         id,
         chanel,
         cb,
@@ -52,7 +48,7 @@ function on(chanel: string, cb: (data: any) => void, key?: string) {
 }
 
 function emit(chanel: string, data?: any) {
-    for (const ev of global.eventsRegister) {
+    for (const ev of globalThis.eventsRegister) {
         if (ev.chanel === chanel) {
             try {
                 (async () => await ev.cb(data))();
@@ -66,20 +62,20 @@ function emit(chanel: string, data?: any) {
 
 function clear(chanel: string) {
     const newArr = [];
-    for (const ev of global.eventsRegister) {
+    for (const ev of globalThis.eventsRegister) {
         if (ev.chanel !== chanel) {
             newArr.push(ev);
         }
     }
-    global.eventsRegister = newArr;
+    globalThis.eventsRegister = newArr;
 }
 
 function clearAll() {
-    global.eventsRegister = [];
+    globalThis.eventsRegister = [];
 }
 
 function getAllListeners() {
-    return global.eventsRegister;
+    return globalThis.eventsRegister;
 }
 
 const SocketEvent = {

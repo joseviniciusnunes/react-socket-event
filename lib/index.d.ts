@@ -1,9 +1,5 @@
 declare global {
-    namespace NodeJS {
-        interface Global {
-            eventsRegister: EventEmit[];
-        }
-    }
+    var eventsRegister: EventEmit[];
 }
 interface EventEmit {
     id: string;
